@@ -1,7 +1,7 @@
 
 ---
 
-# ✅ README FRONTEND (copiar y pegar en README.md del frontend)
+#  README FRONTEND
 
 ```markdown
 # 🎓 Sistema Académico - Frontend
