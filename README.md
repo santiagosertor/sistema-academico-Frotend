@@ -4,13 +4,13 @@
 #  README FRONTEND
 
 ```markdown
-# 🎓 Sistema Académico - Frontend
+#  Sistema Académico - Frontend
 
 Frontend del sistema académico desarrollado como SPA utilizando Vite y JavaScript modular.
 
 ---
 
-## 🚀 Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - HTML5
 - CSS3
@@ -20,7 +20,7 @@ Frontend del sistema académico desarrollado como SPA utilizando Vite y JavaScri
 
 ---
 
-## 📁 Estructura
+##  Estructura
 
 frontend/
 │
