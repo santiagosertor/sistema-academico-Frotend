@@ -1,0 +1,44 @@
+.panel-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.panel-card {
+  width: 800px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.panel-menu {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.panel-menu li {
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.panel-menu li:hover {
+  background: #ddd;
+}
+
+#admin-contenido {
+  margin-top: 20px;
+}
+
+input, select, button {
+  margin: 5px;
+}
+
+.logout {
+  margin-top: 20px;
+  background: crimson;
+  color: white;
+}

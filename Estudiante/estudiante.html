@@ -1,0 +1,74 @@
+<!-- estudiante.html -->
+<header>
+  <h1>Panel del Estudiante</h1>
+</header>
+
+<div class="dashboard">
+  <aside class="sidebar">
+    <button data-seccion="dashboard">Inicio</button>
+    <button data-seccion="perfil">Perfil</button>
+    <button data-seccion="cursos">Cursos</button>
+    <button data-seccion="notas">Notas</button>
+    <button data-seccion="historial">Historial</button>
+    <button class="btn-salir" onclick="cerrarSesion()">Cerrar sesión</button>
+  </aside>
+
+  <div class="contenido">
+    <!-- Vista inicial -->
+    <section id="dashboard" class="card">
+      <h2 id="saludo">Bienvenido al Panel Estudiante</h2>
+      <p>Selecciona una opción en el menú lateral para comenzar.</p>
+    </section>
+
+    <!-- Perfil -->
+    <section id="perfil" class="card" style="display:none;">
+      <h2>Perfil del Estudiante</h2>
+      <form id="formPerfil">
+        <label>Nombre: <input type="text" id="nombre"></label><br>
+        <label>Apellido: <input type="text" id="apellido"></label><br>
+        <label>Documento: <input type="text" id="documento"></label><br>
+        <label>Correo: <input type="email" id="correo"></label><br>
+        <button type="submit">Guardar</button>
+      </form>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos" class="card" style="display:none;">
+      <h2>Mis Cursos</h2>
+      <table>
+        <thead>
+          <tr><th>Curso</th><th>Periodo</th></tr>
+        </thead>
+        <tbody id="tablaCursos">
+          <!-- Aquí se insertan los cursos reales -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Notas -->
+    <section id="notas" class="card" style="display:none;">
+      <h2>Mis Notas</h2>
+      <table>
+        <thead>
+          <tr><th>Curso</th><th>Bloque</th><th>Quiz</th><th>Parcial</th><th>Trabajo</th><th>Promedio</th><th>Estado</th></tr>
+        </thead>
+        <tbody id="tablaNotas">
+          <!-- Aquí se insertan las notas reales -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Historial -->
+    <section id="historial" class="card" style="display:none;">
+      <h2>Historial Académico</h2>
+      <table>
+        <thead>
+          <tr><th>Curso</th><th>Periodo</th><th>Promedio Final</th><th>Estado</th></tr>
+        </thead>
+        <tbody id="tablaHistorial">
+          <!-- Aquí se insertan los datos del historial -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

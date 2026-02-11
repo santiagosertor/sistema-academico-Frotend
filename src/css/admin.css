@@ -1,0 +1,100 @@
+/* =========================
+   FORMULARIOS ADMIN
+========================= */
+.dashboard form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  background: var(--surface);
+  padding: 28px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard form h2 {
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.dashboard form input {
+  padding: 12px;
+  border: 1px solid var(--surface-alt);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  transition: var(--transition);
+}
+
+.dashboard form input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+.dashboard form button {
+  padding: 14px;
+  background: var(--primary-light);
+  color: #fff;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dashboard form button:hover {
+  background: var(--primary);
+}
+
+/* =========================
+   LISTAS ADMIN
+========================= */
+.dashboard ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.dashboard ul li {
+  background: var(--surface);
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard ul li span {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dashboard ul li button {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dashboard ul li button:hover {
+  opacity: 0.9;
+}
+
+
+#materia-nombre, #materia-descripcion {
+  display: block;
+  width: 100%;       /* ocupa todo el ancho del contenedor */
+  max-width: 400px;  /* límite para que no se estire infinito */
+  margin-bottom: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+#materia-descripcion {
+  resize: none;      /*evita que el usuario pueda estirarlo */
+}

@@ -1,0 +1,43 @@
+.menu-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-card {
+  background: var(--card);
+  padding: 3rem;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+
+.menu-card h1 {
+  margin-bottom: .5rem;
+}
+
+.menu-card p {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.menu-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.menu-buttons button {
+  flex: 1;
+  padding: .9rem;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+.menu-buttons .secondary {
+  background: var(--secondary);
+}
