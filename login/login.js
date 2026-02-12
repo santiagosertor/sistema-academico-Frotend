@@ -1,8 +1,7 @@
 // Importación del módulo de alertas.
 // Relación entre módulos: se centraliza la lógica de mostrar mensajes al usuario
 // para mantener consistencia en la interfaz.
-import { alerta } from '../js/alertas.js';
-
+import { alerta } from "../js/alertas.js";
 /**
  * Inicializa la lógica de inicio de sesión.
  * - Localiza el formulario de login en el DOM.

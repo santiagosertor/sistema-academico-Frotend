@@ -1,3 +1,5 @@
+import { alerta } from "../js/alertas.js";
+
 /**
  * Carga las opciones disponibles para crear un curso.
  * - Obtiene lista de docentes y materias desde el backend.
@@ -45,7 +47,7 @@ export async function cargarOpcionesCurso() {
 
   } catch (err) {
     console.error(err);
-    alert('Error cargando opciones de curso');
+    alerta('Error cargando opciones de curso');
   }
 }
 
@@ -75,7 +77,7 @@ export async function cargarCursos() {
 
   } catch (err) {
     console.error(err);
-    alert('Error cargando cursos');
+    alerta('Error cargando cursos');
   }
 }
 
@@ -113,7 +115,7 @@ export function initCursos() {
     // Validación crítica:
     // Todos los campos son obligatorios para crear un curso válido.
     if (!id_docente || !id_materia || !periodo) {
-      alert('Todos los campos son obligatorios');
+      alerta('Todos los campos son obligatorios');
       return;
     }
 
@@ -134,7 +136,7 @@ export function initCursos() {
       // Validación crítica:
       // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alert(data.message || 'Error creando curso');
+        alerta(data.message || 'Error creando curso');
         return;
       }
 
@@ -146,7 +148,7 @@ export function initCursos() {
       // Manejo de errores globales:
       // Si ocurre un fallo en la conexión, se informa al usuario y se loguea en consola.
       console.error(err);
-      alert('Error de conexión con el servidor');
+      alerta('Error de conexión con el servidor');
     }
   });
 }

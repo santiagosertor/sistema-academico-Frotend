@@ -1,3 +1,5 @@
+import { alerta } from "../js/alertas.js";
+
 /**
  * Inicializa la lógica de gestión de materias.
  * - Configura el formulario para crear nuevas materias.
@@ -26,7 +28,7 @@ export function initMaterias() {
     // Validación crítica:
     // El nombre de la materia es obligatorio para evitar registros incompletos.
     if (!nombre_materia) {
-      alert('El nombre de la materia es obligatorio');
+      alerta('El nombre de la materia es obligatorio');
       return;
     }
 
@@ -47,7 +49,7 @@ export function initMaterias() {
       // Validación crítica:
       // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alert(data.message || 'Error creando materia');
+        alerta(data.message || 'Error creando materia');
         return;
       }
 
@@ -64,7 +66,7 @@ export function initMaterias() {
       // Manejo de errores globales:
       // Si ocurre un fallo en la conexión, se informa al usuario y se loguea en consola.
       console.error(err);
-      alert('Error de conexión con el servidor');
+      alerta('Error de conexión con el servidor');
     }
   });
 }

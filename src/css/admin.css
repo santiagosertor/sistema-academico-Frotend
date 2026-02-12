@@ -28,14 +28,14 @@
 .dashboard form input:focus {
   outline: none;
   border-color: var(--primary-light);
-  background: #fff;
+  background: var(--surface);
   box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
 }
 
 .dashboard form button {
   padding: 14px;
   background: var(--primary-light);
-  color: #fff;
+  color: var(--surface);
   font-weight: 600;
   border-radius: var(--radius);
   cursor: pointer;
@@ -73,7 +73,7 @@
 
 .dashboard ul li button {
   background: var(--danger);
-  color: #fff;
+  color: var(--surface);
   border: none;
   padding: 6px 12px;
   border-radius: var(--radius);

@@ -1,3 +1,5 @@
+import { alerta } from "../js/alertas.js";
+
 /**
  * Inicializa la lógica de gestión de docentes.
  * - Configura el formulario para crear nuevos docentes.
@@ -33,7 +35,7 @@ export function initDocentes() {
     // Validación crítica:
     // Se asegura que todos los campos obligatorios estén completos.
     if (!nombre_usuario || !contrasena || !nombre || !apellido || !documento) {
-      alert('Completa todos los campos obligatorios');
+      alerta('Completa todos los campos obligatorios');
       return;
     }
 
@@ -54,7 +56,7 @@ export function initDocentes() {
       // Validación crítica:
       // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alert(data.message || 'Error creando docente');
+        alerta(data.message || 'Error creando docente');
         return;
       }
 
@@ -71,7 +73,7 @@ export function initDocentes() {
       // Manejo de errores globales:
       // Si ocurre un fallo en la conexión, se informa al usuario y se loguea en consola.
       console.error(err);
-      alert('Error de conexión con el servidor');
+      alerta('Error de conexión con el servidor');
     }
   });
 }

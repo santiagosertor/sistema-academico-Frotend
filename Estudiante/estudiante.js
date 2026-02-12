@@ -161,7 +161,7 @@ function guardarPerfil() {
   })
     .then(resp => resp.json())
     .then(data => {
-      alerta(data.message || 'Perfil actualizado correctamente');
+      alerta(data.message || 'Perfil actualizado correctamente', 'ok');
       cargarDashboard();
     })
     .catch(err => {

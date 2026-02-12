@@ -1,7 +1,7 @@
 /* Header del estudiante */
 header {
-  background: var(--primary);
-  color: #fff;
+  background: var(--secondary);
+  color: var(--surface);
   padding: 16px 24px;
   display: flex;
   justify-content: space-between;
@@ -11,4 +11,22 @@ header {
 header h1 {
   font-size: 20px;
   font-weight: 600;
+}
+
+/* Contenedor de tablas largas */
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Scroll horizontal en móviles/tablets */
+@media (max-width: 768px) {
+  .card {
+    overflow-x: auto;              /* activa scroll horizontal */
+    -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
+  }
+
+  .card table {
+    min-width: 600px;              /* ancho mínimo para que no se comprima demasiado */
+  }
 }

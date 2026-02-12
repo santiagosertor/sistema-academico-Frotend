@@ -1,7 +1,3 @@
-// Importación de estilos específicos para el módulo de administración.
-// Relación entre módulos: asegura que la vista de Admin tenga su propio diseño visual.
-import '../../css/admin.css';
-
 /**
  * Inicializa el panel de administración.
  * - Verifica la existencia del contenedor principal.
@@ -57,7 +53,7 @@ async function cargarSubVista(vista) {
 
   try {
     // HTML fragment
-    const resp = await fetch(`/Admin/${vista}.html`);
+    const resp = await fetch(`Admin/${vista}.html`);
     if (!resp.ok) {
       cont.innerHTML = `<h2>Error cargando ${vista}</h2>`;
       return;

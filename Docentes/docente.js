@@ -1,6 +1,8 @@
 // ===============================
 // helper fetch JSON
 // ===============================
+import { alerta } from "../js/alertas.js";
+
 /**
  * Función auxiliar para realizar peticiones fetch y devolver JSON.
  * - Agrega automáticamente cabeceras de autorización y tipo de contenido.
@@ -158,7 +160,7 @@ async function inscribirEstudiante() {
       { method: 'POST' }
     );
 
-    alerta(resp.message || 'Estudiante inscrito correctamente');
+    alerta(resp.message || 'Estudiante inscrito correctamente', 'ok');
     cargarEstudiantes(idCurso); // refrescar lista del curso
   } catch (err) {
     console.error(err);
@@ -249,10 +251,10 @@ async function guardarNota() {
 
     document.getElementById('promedioBloque').textContent = resp.promedio_bloque;
     document.getElementById('estadoNota').textContent = resp.estado;
-    alerta('Nota guardada correctamente', 'success');
+    alerta('Nota guardada correctamente', 'ok');
   } catch (err) {
     console.error(err);
-    alerta('Error guardando nota', 'error');
+    alerta('Error guardando nota'); 
   }
 }
 
@@ -294,23 +296,6 @@ function cargarVista(idVista) {
     vista.style.display = 'block';
   }
 }
-
-// ===============================
-// alerta
-// ===============================
-
-/**
- * Función simple de alerta para el docente.
- * - Muestra mensaje en un div dinámico.
- * - Tipos: success, error, info.
- */
-export function alerta(mensaje, tipo = 'info') {
-  const div = document.createElement('div');
-  div.className = `alert ${tipo}`; // tipo puede ser 'success', 'error', 'info'
-  div.textContent = mensaje;
-  document.body.appendChild
-}
-
 // ===============================
 // Exponer funciones globales
 // ===============================

@@ -1,3 +1,5 @@
+import { alerta } from "../js/alertas.js";
+
 /**
  * Inicializa la lógica de registro de usuarios.
  * - Localiza el formulario de registro en el DOM.
@@ -40,14 +42,14 @@ export function initRegistro() {
     // Validación crítica:
     // Se asegura que todos los campos requeridos estén completos.
     if (!nombre_usuario || !correo || !contrasena || !confirmar) {
-      alert('Completa todos los campos');
+      alerta('Completa todos los campos');
       return;
     }
 
     // Validación crítica:
     // Se comprueba que las contraseñas coincidan antes de enviar al backend.
     if (contrasena !== confirmar) {
-      alert('Las contraseñas no coinciden');
+      alerta('Las contraseñas no coinciden');
       return;
     }
 
@@ -71,13 +73,13 @@ export function initRegistro() {
       // Validación crítica:
       // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alert(data.message || 'Error al registrar');
+        alerta(data.message || 'Error al registrar');
         return;
       }
 
       // Confirmación al usuario:
       // Se muestra el mensaje de éxito retornado por el backend.
-      alert(data.message);
+      alerta(data.message, "ok");
 
       // Relación entre módulos:
       // Tras un registro exitoso, se redirige al login para que el usuario
@@ -88,7 +90,7 @@ export function initRegistro() {
       // Manejo de errores globales:
       // Si ocurre un fallo en la petición, se informa al usuario y se loguea en consola.
       console.error(err);
-      alert('Error al registrar');
+      alerta('Error al registrar');
     }
   });
 }

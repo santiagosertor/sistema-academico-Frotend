@@ -24,14 +24,14 @@
   padding: .8rem;
   margin-bottom: 1rem;
   border-radius: var(--radius);
-  border: 1px solid #ddd;
+  border: 1px solid var(--surface);
 }
 
 .auth-card button {
   width: 100%;
   padding: .9rem;
   background: var(--primary);
-  color: white;
+  color: var(--surface);
   border-radius: var(--radius);
   font-weight: 600;
 }
