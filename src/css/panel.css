@@ -1,44 +1,62 @@
+/* Contenedor principal que centra todo con orden */
 .panel-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 30px;
 }
 
-.panel-card {
-  width: 800px;
-  background:var(--surface);
-  padding: 20px;
-  border-radius: 8px;
+/* El título "Administrador" con el estilo de tus fotos anteriores */
+.panel-container h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
 }
 
+/* La barra que agrupa tus botones (Panel-menu) */
 .panel-menu {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  padding: 0;
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05); /* Efecto cristal */
+    backdrop-filter: blur(15px);
+    padding: 12px;
+    border-radius: 50px; /* Estilo píldora */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-premium);
 }
 
+/* Tus botones ahora como pestañas Pro */
 .panel-menu li {
-  cursor: pointer;
-  padding: 8px 12px;
-  background: var(--surface-alt);
-  border-radius: 4px;
+    list-style: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
 .panel-menu li:hover {
-  background: var(--background);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
 }
 
-#admin-contenido {
-  margin-top: 20px;
-}
-
-input, select, button {
-  margin: 5px;
-}
-
+/* Botón de cerrar sesión resaltado */
 .logout {
-  margin-top: 20px;
-  background: var(--background);
-  color: var(--surface);
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #ff4d4d !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+}
+
+.logout:hover {
+    background: var(--danger) !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
 }

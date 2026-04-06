@@ -2,46 +2,62 @@ import { alerta } from "../js/alertas.js";
 
 /**
  * Inicializa la lógica de gestión de docentes.
- * - Configura el formulario para crear nuevos docentes.
- * - Renderiza la lista de docentes en la interfaz.
- *
- * Decisión técnica:
- * Se encapsula en `initDocentes` para que solo se ejecute cuando
- * la vista de administración de docentes esté activa en la SPA.
  */
 export function initDocentes() {
-  console.log('Docentes inicializado');
+  console.log('Gestión de Docentes: ACTIVADA');
 
   const form = document.getElementById('formDocente');
   const lista = document.getElementById('listaDocentes');
 
-  /**
-   * Listener del evento submit del formulario.
-   * - Previene la recarga de página.
-   * - Obtiene valores de los campos y aplica validaciones.
-   * - Envía datos al backend para registrar un nuevo docente.
-   */
+  if (!form) return;
+
+  // --- CONFIGURACIÓN DE LÍMITES (Evita textos infinitos) ---
+  const inputs = {
+    usuario: document.getElementById('docente-usuario'),
+    pass: document.getElementById('docente-pass'),
+    doc: document.getElementById('docente-documento'),
+    correo: document.getElementById('docente-correo')
+  };
+
+  if (inputs.usuario) inputs.usuario.maxLength = 20;
+  if (inputs.pass) inputs.pass.maxLength = 16;
+  if (inputs.doc) inputs.doc.maxLength = 10; 
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Obtención de valores desde el formulario
-    const nombre_usuario = document.getElementById('docente-usuario').value.trim();
-    const contrasena = document.getElementById('docente-pass').value.trim();
+    // Obtención de valores
+    const nombre_usuario = inputs.usuario.value.trim();
+    const contrasena = inputs.pass.value.trim();
     const nombre = document.getElementById('docente-nombre').value.trim();
     const apellido = document.getElementById('docente-apellido').value.trim();
-    const documento = document.getElementById('docente-documento').value.trim();
-    const correo = document.getElementById('docente-correo').value.trim();
+    const documento = inputs.doc.value.trim();
+    const correo = inputs.correo.value.trim();
 
-    // Validación crítica:
-    // Se asegura que todos los campos obligatorios estén completos.
-    if (!nombre_usuario || !contrasena || !nombre || !apellido || !documento) {
-      alerta('Completa todos los campos obligatorios');
+    // --- 1. VALIDACIÓN: CAMPOS VACÍOS ---
+    if (!nombre_usuario || !contrasena || !nombre || !apellido || !documento || !correo) {
+      alerta('Todos los campos son obligatorios', 'warning');
+      return;
+    }
+
+    // --- 2. VALIDACIÓN: FORMATO DE EMAIL ---
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+      alerta('El formato del correo no es válido', 'error');
+      inputs.correo.focus();
+      return;
+    }
+
+    // --- 3. VALIDACIÓN: FORTALEZA DE CLAVE (Mínimo 8 caracteres, letra y número) ---
+    const passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passRegex.test(contrasena)) {
+      alerta('La clave debe tener al menos 8 caracteres, incluyendo letras y números', 'warning');
+      inputs.pass.focus();
       return;
     }
 
     try {
-      // Relación entre módulos:
-      // Se envía la información al backend mediante fetch.
+      // Petición al backend con Token de Seguridad
       const resp = await fetch('http://localhost:3000/api/admin/docentes', {
         method: 'POST',
         headers: {
@@ -53,27 +69,27 @@ export function initDocentes() {
 
       const data = await resp.json();
 
-      // Validación crítica:
-      // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alerta(data.message || 'Error creando docente');
+        alerta(data.message || 'Error creando docente', 'error');
         return;
       }
 
-      // Renderizado dinámico:
-      // Se agrega el nuevo docente a la lista visual sin recargar la página.
+      // --- RENDERIZADO DINÁMICO (Estilo Elite Glass) ---
+      // Creamos la estructura que combine con tu CSS de filas de cristal
       const li = document.createElement('li');
-      li.textContent = `${nombre_usuario} - ${nombre} ${apellido} - ${documento} - ${correo}`;
+      li.innerHTML = `
+        <span><strong>${nombre_usuario}</strong> - ${nombre} ${apellido}</span>
+        <div class="info-secundaria">${documento} | ${correo}</div>
+      `;
+      
       lista.appendChild(li);
 
-      // Reset del formulario para permitir nuevas entradas.
+      alerta('Docente creado correctamente', 'ok');
       form.reset();
 
     } catch (err) {
-      // Manejo de errores globales:
-      // Si ocurre un fallo en la conexión, se informa al usuario y se loguea en consola.
       console.error(err);
-      alerta('Error de conexión con el servidor');
+      alerta('Fallo de conexión con el servidor', 'error');
     }
   });
 }

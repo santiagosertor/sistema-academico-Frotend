@@ -1,43 +1,114 @@
+/* ==============================================
+   MENÚ PRINCIPAL 
+   ============================================== */
+
 .menu-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--background); 
+  padding: 24px;
 }
 
 .menu-card {
-  background: var(--card);
-  padding: 3rem;
-  border-radius: var(--radius);
+  background: var(--surface); /* Glassmorphism del global */
+  backdrop-filter: blur(30px); /* Aumentamos el desenfoque para más lujo */
+  -webkit-backdrop-filter: blur(30px);
+  padding: 4.5rem 3.5rem;
+  border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  box-shadow: var(--shadow-premium);
+  border: 1px solid rgba(255, 255, 255, 0.12); /* Borde más definido */
+  transition: var(--transition);
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .menu-card h1 {
-  margin-bottom: .5rem;
+  font-size: 3rem; /* Un poco más grande para imponer */
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  /* Aplicamos el gradiente del global al título */
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
 }
 
 .menu-card p {
-  color: var(--muted);
-  margin-bottom: 2rem;
+  color: var(--primary-light); /* Azul más brillante para el subtítulo */
+  text-transform: uppercase;
+  letter-spacing: 5px; /* Más aire entre letras = más elegante */
+  font-weight: 800;
+  font-size: 0.7rem;
+  margin-bottom: 3.5rem;
+  opacity: 0.9;
 }
 
 .menu-buttons {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .menu-buttons button {
-  flex: 1;
-  padding: .9rem;
-  border-radius: var(--radius);
-  background: var(--primary);
-  color: var(--surface);
-  font-weight: 600;
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: var(--radius-pill);
+  font-weight: 900; /* Peso máximo para que se vea Pro */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
 }
 
+/* Botón Iniciar Sesión (Foco de atención) */
+.menu-buttons .primary {
+  background: #ffffff;
+  color: var(--secondary);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+.menu-buttons .primary:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+  background: #fdfdfd;
+}
+
+/* Botón Registro (Elegante y traslúcido) */
 .menu-buttons .secondary {
-  background: var(--secondary);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-buttons .secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+}
+
+.menu-buttons button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Responsive optimizado */
+@media (max-width: 480px) {
+  .menu-card {
+    padding: 3.5rem 1.5rem;
+    border-radius: 24px;
+    margin: 15px;
+  }
+  
+  .menu-card h1 {
+    font-size: 2.2rem;
+  }
 }

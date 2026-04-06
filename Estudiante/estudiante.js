@@ -1,23 +1,15 @@
 // Importación del módulo de alertas.
 // Relación entre módulos: se centraliza la lógica de notificación para mantener consistencia.
+// Importación del módulo de alertas.
 import { alerta } from '../js/alertas.js';
 
 /**
  * Inicializa la vista del estudiante.
- * - Configura navegación lateral.
- * - Activa botón de cerrar sesión.
- * - Carga el dashboard inicial.
- * - Configura el formulario de perfil.
- *
- * Decisión técnica:
- * Se encapsula en `initEstudiante` para que solo se ejecute cuando
- * la vista del estudiante esté activa en la SPA.
  */
 export function initEstudiante() {
   console.log('Estudiante inicializado');
 
   // Sidebar navegación
-  // Relación entre módulos: cada botón de la barra lateral navega a una sección distinta.
   document.querySelectorAll('.sidebar button').forEach(btn => {
     btn.addEventListener('click', () => {
       const seccion = btn.getAttribute('data-seccion');
@@ -35,6 +27,15 @@ export function initEstudiante() {
   navegar('dashboard');
   cargarDashboard();
 
+  // --- CONFIGURACIÓN DE LÍMITES FÍSICOS (Evita desbordamientos) ---
+  const inputNombre = document.getElementById('nombre');
+  const inputApellido = document.getElementById('apellido');
+  const inputDoc = document.getElementById('documento');
+
+  if (inputNombre) inputNombre.maxLength = 40;
+  if (inputApellido) inputApellido.maxLength = 40;
+  if (inputDoc) inputDoc.maxLength = 15; // Límite para un documento estándar
+
   // Perfil: manejar submit
   const formPerfil = document.getElementById('formPerfil');
   if (formPerfil) {
@@ -47,11 +48,6 @@ export function initEstudiante() {
 
 /**
  * Función de navegación interna.
- * - Oculta todas las secciones y muestra solo la seleccionada.
- * - Carga datos dinámicos según la sección activa.
- *
- * Validación crítica:
- * Se verifica que el target exista antes de mostrarlo.
  */
 function navegar(seccion) {
   document.querySelectorAll('.contenido section').forEach(sec => {
@@ -70,15 +66,6 @@ function navegar(seccion) {
 }
 
 // ===== Dashboard =====
-/**
- * Carga el dashboard del estudiante.
- * - Obtiene datos del perfil básico desde el backend.
- * - Muestra saludo personalizado.
- * - Actualiza ID global del estudiante para otras consultas.
- *
- * Validación crítica:
- * Se verifica que la respuesta sea OK antes de procesar datos.
- */
 function cargarDashboard() {
   const saludo = document.getElementById('saludo');
   fetch('http://localhost:3000/api/estudiante/me', {
@@ -91,9 +78,7 @@ function cargarDashboard() {
     .then(data => {
       saludo.textContent = `Bienvenido, ${(data.nombre || '')} ${(data.apellido || '')}`;
       window.estudianteId = data.id_estudiante;
-      console.log('ID estudiante:', data.id_estudiante);
-
-      // Si ya estás en otra sección, recarga sus datos
+      
       const visible = document.querySelector('.contenido section[style*="block"]');
       if (visible) {
         if (visible.id === 'cursos') cargarCursosEstudiante();
@@ -108,13 +93,6 @@ function cargarDashboard() {
 }
 
 // ===== Perfil =====
-/**
- * Carga los datos del perfil del estudiante desde el backend.
- * - Rellena los campos del formulario con la información existente.
- *
- * Validación crítica:
- * Se verifica respuesta OK antes de asignar valores.
- */
 function cargarPerfil() {
   fetch('http://localhost:3000/api/estudiante/perfil', {
     headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
@@ -131,25 +109,31 @@ function cargarPerfil() {
     })
     .catch(err => {
       console.error(err);
-      alerta('No se pudo cargar el perfil, completa tus datos');
+      alerta('No se pudo cargar el perfil');
     });
 }
 
 /**
  * Guarda los cambios en el perfil del estudiante.
- * - Envía datos al backend mediante PUT.
- * - Actualiza dashboard tras éxito.
- *
- * Validación crítica:
- * Se envía token en headers para garantizar seguridad.
+ * Se añadieron validaciones críticas de datos personales.
  */
 function guardarPerfil() {
-  const payload = {
-    nombre: document.getElementById('nombre').value,
-    apellido: document.getElementById('apellido').value,
-    documento: document.getElementById('documento').value,
-    correo: document.getElementById('correo').value
-  };
+  const nombre = document.getElementById('nombre').value.trim();
+  const apellido = document.getElementById('apellido').value.trim();
+  const documento = document.getElementById('documento').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+
+  // --- VALIDACIÓN CRÍTICA: Datos obligatorios ---
+  if (!nombre || !apellido || !documento) {
+    return alerta('Nombre, Apellido y Documento son requeridos', 'warning');
+  }
+
+  // --- VALIDACIÓN CRÍTICA: Longitud de documento ---
+  if (documento.length < 5) {
+    return alerta('El número de documento no es válido', 'warning');
+  }
+
+  const payload = { nombre, apellido, documento, correo };
 
   fetch('http://localhost:3000/api/estudiante/perfil', {
     method: 'PUT',
@@ -171,11 +155,6 @@ function guardarPerfil() {
 }
 
 // ===== Cursos =====
-/**
- * Carga los cursos del estudiante.
- * - Consulta al backend usando el ID global.
- * - Renderiza tabla de cursos en la vista.
- */
 async function cargarCursosEstudiante() {
   const idEstudiante = window.estudianteId;
   if (!idEstudiante) return;
@@ -192,14 +171,6 @@ async function cargarCursosEstudiante() {
 }
 
 // ===== Notas =====
-/**
- * Carga las notas del estudiante.
- * - Consulta al backend usando el ID global.
- * - Renderiza tabla de notas con detalle por materia y bloque.
- *
- * Decisión técnica:
- * Se usa template string para construir filas dinámicamente.
- */
 async function cargarNotasEstudiante() {
   const idEstudiante = window.estudianteId;
   if (!idEstudiante) return;
@@ -224,14 +195,6 @@ async function cargarNotasEstudiante() {
 }
 
 // ===== Historial =====
-/**
- * Carga el historial académico del estudiante.
- * - Consulta al backend usando el ID global.
- * - Renderiza tabla con promedio final y estado.
- *
- * Validación crítica:
- * Se fuerza formato numérico con `toFixed(2)` para consistencia visual.
- */
 async function cargarHistorialEstudiante() {
   const idEstudiante = window.estudianteId;
   if (!idEstudiante) return;

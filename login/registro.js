@@ -1,62 +1,91 @@
+/**
+ * Inicializa la lógica de registro de usuarios.
+ * - Localiza el formulario de registro en el DOM.
+ * - Configura límites de caracteres y validaciones de formato (Email/Password).
+ * - Envía los datos al backend real (localhost:3000).
+ */
 import { alerta } from "../js/alertas.js";
 
 /**
  * Inicializa la lógica de registro de usuarios.
- * - Localiza el formulario de registro en el DOM.
- * - Configura validaciones básicas de campos.
- * - Envía los datos al backend para crear un nuevo usuario.
- *
- * Decisión técnica:
- * Se encapsula en una función `initRegistro` para que solo se ejecute
- * cuando la vista de registro esté activa en la SPA.
  */
 export function initRegistro() {
   const form = document.querySelector('.auth-card');
+  const btnRegistro = form?.querySelector('button[type="submit"]');
 
-  // Validación crítica:
-  // Si el formulario no existe en el DOM, se evita configurar eventos
-  // y se muestra advertencia en consola.
   if (!form) {
     console.warn('Formulario de registro no encontrado');
     return;
   }
 
-  console.log('Registro ACTIVADO');
+  console.log('Registro ACTIVADO (Modo Real)');
 
-  /**
-   * Listener del evento submit del formulario.
-   * - Previene el comportamiento por defecto (recarga de página).
-   * - Obtiene valores de los campos y aplica validaciones.
-   * - Envía la petición al backend para registrar al usuario.
-   */
+  // --- LIMITACIÓN FÍSICA DE CARACTERES ---
+  const inputNombre = document.getElementById('nombre_usuario');
+  const inputEmail = document.getElementById('correo');
+  const inputPass = document.getElementById('contrasena');
+  const inputConfirmar = document.getElementById('confirmar');
+
+  if (inputNombre) inputNombre.maxLength = 30;
+  if (inputPass) inputPass.maxLength = 20;
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Obtención de valores de los campos del formulario.
-    // Se usa optional chaining (?.) para evitar errores si el campo no existe.
-    const nombre_usuario = document.getElementById('nombre_usuario')?.value.trim();
-    const correo = document.getElementById('correo')?.value.trim();
-    const contrasena = document.getElementById('contrasena')?.value.trim();
-    const confirmar = document.getElementById('confirmar')?.value.trim(); // 👈 corregido
+    // Obtención de valores
+    const nombre_usuario = inputNombre?.value.trim();
+    const correo = inputEmail?.value.trim();
+    const contrasena = inputPass?.value.trim();
+    const confirmar = inputConfirmar?.value.trim();
 
-    // Validación crítica:
-    // Se asegura que todos los campos requeridos estén completos.
-    if (!nombre_usuario || !correo || !contrasena || !confirmar) {
-      alerta('Completa todos los campos');
+    // --- 1. VALIDACIÓN DETALLADA (MARCA EL CAMPO ESPECÍFICO) ---
+    if (!nombre_usuario) {
+      alerta('Ingresa un nombre de usuario', 'warning');
+      inputNombre.focus();
       return;
     }
 
-    // Validación crítica:
-    // Se comprueba que las contraseñas coincidan antes de enviar al backend.
+    if (!correo) {
+      alerta('El correo es obligatorio', 'warning');
+      inputEmail.focus();
+      return;
+    }
+
+    // --- 2. VALIDACIÓN: FORMATO DE EMAIL ---
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+      alerta('Ingresa un correo electrónico válido', 'error');
+      inputEmail.focus();
+      return;
+    }
+
+    if (!contrasena) {
+      alerta('Debes asignar una contraseña', 'warning');
+      inputPass.focus();
+      return;
+    }
+
+    // --- 3. VALIDACIÓN: FORTALEZA DE CONTRASEÑA ---
+    const passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passRegex.test(contrasena)) {
+      alerta('Mínimo 8 caracteres, con letras y números', 'warning');
+      inputPass.focus();
+      return;
+    }
+
+    // --- 4. VALIDACIÓN: COINCIDENCIA ---
     if (contrasena !== confirmar) {
-      alerta('Las contraseñas no coinciden');
+      alerta('Las contraseñas no coinciden', 'error');
+      inputConfirmar.focus();
       return;
     }
 
     try {
-      // Relación entre módulos:
-      // Se envía la información al backend mediante fetch.
-      // El rol se fija como "Estudiante" para mantener consistencia en la lógica de negocio.
+      if (btnRegistro) {
+        btnRegistro.disabled = true;
+        btnRegistro.textContent = "Procesando...";
+      }
+
       const resp = await fetch('http://localhost:3000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -64,33 +93,30 @@ export function initRegistro() {
           nombre_usuario,
           correo,
           contrasena,
-          rol: 'Estudiante'   // 👈 se guarda como estudiante
+          rol: 'Estudiante'
         })
       });
 
       const data = await resp.json();
 
-      // Validación crítica:
-      // Si la respuesta no es OK, se muestra el mensaje de error del backend.
       if (!resp.ok) {
-        alerta(data.message || 'Error al registrar');
-        return;
+        throw new Error(data.message || 'Error al registrar');
       }
 
-      // Confirmación al usuario:
-      // Se muestra el mensaje de éxito retornado por el backend.
-      alerta(data.message, "ok");
+      alerta(data.message || "¡Registro exitoso!", "ok");
 
-      // Relación entre módulos:
-      // Tras un registro exitoso, se redirige al login para que el usuario
-      // pueda autenticarse inmediatamente.
-      window.navegar('/login/login.html');
+      setTimeout(() => {
+        window.navegar('/login/login.html');
+      }, 2000);
 
     } catch (err) {
-      // Manejo de errores globales:
-      // Si ocurre un fallo en la petición, se informa al usuario y se loguea en consola.
-      console.error(err);
-      alerta('Error al registrar');
+      console.error("Error en registro:", err);
+      alerta(err.message, 'error');
+
+      if (btnRegistro) {
+        btnRegistro.disabled = false;
+        btnRegistro.textContent = "Registrarme";
+      }
     }
   });
 }

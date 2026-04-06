@@ -1,100 +1,167 @@
-/* =========================
-   FORMULARIOS ADMIN
-========================= */
-.dashboard form {
+* /*==============================================
+   LAYOUT DASHBOARD - ELITE GLASS
+   ============================================== */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw; /* Asegura que ocupe todo el ancho */
+  background: var(--background);
+  overflow: hidden;
+}
+
+/* SIDEBAR FIJO A LA IZQUIERDA */
+.sidebar {
+  width: 280px;
+  min-width: 280px; /* Evita que se encoja */
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  padding: 40px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 600px;
-  background: var(--surface);
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  height: 100vh; /* Ocupa todo el alto de la pantalla */
+  position: sticky;
+  top: 0;
 }
 
-.dashboard form h2 {
+.sidebar h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  text-align: center;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* BOTONES DEL SIDEBAR TIPO PÍLDORA */
+.sidebar button {
+  width: 100%;
+  padding: 14px 20px;
   margin-bottom: 12px;
-  color: var(--primary);
-}
-
-.dashboard form input {
-  padding: 12px;
-  border: 1px solid var(--surface-alt);
-  border-radius: var(--radius);
-  background: var(--surface-alt);
+  border-radius: var(--radius-pill); /* Estilo píldora */
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  font-weight: 700;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: var(--transition);
 }
 
-.dashboard form input:focus {
-  outline: none;
+.sidebar button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: white;
+  transform: translateX(8px);
+}
+
+/* Botón activo (donde estás parado) */
+.sidebar button.active {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+}
+
+/* BOTÓN SALIR - IMPACTO ROJO */
+.sidebar .btn-salir {
+  margin-top: auto; /* Lo empuja al final */
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.sidebar .btn-salir:hover {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+/* CONTENIDO PRINCIPAL */
+.contenido {
+  flex: 1;
+  padding: 50px;
+  overflow-y: auto;
+}
+/* FORMULARIOS (Cursos, Docentes, Materias) */
+#formCurso, #formDocente, #formMateria {
+  background: var(--surface); /* Glassmorphism */
+  backdrop-filter: blur(25px);
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 700px;
+  display: grid;
+  gap: 15px;
+  box-shadow: var(--shadow-premium);
+  margin-bottom: 40px;
+}
+
+#admin-contenido h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: white;
+  font-weight: 800;
+}
+
+/* Inputs y Selects dentro del Admin */
+#admin-contenido input, 
+#admin-contenido select, 
+#admin-contenido textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 1rem;
+}
+
+/* 🚀 AGREGA ESTO PARA LAS OPCIONES */
+#admin-contenido select option {
+  background-color: var(--secondary); /* O un color oscuro sólido como #1E293B */
+  color: white;
+}
+
+#admin-contenido input:focus,
+#admin-contenido select:focus {
   border-color: var(--primary-light);
-  background: var(--surface);
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
 }
 
-.dashboard form button {
+/* BOTONES DE ACCIÓN */
+#admin-contenido button[type="submit"] {
+  background: var(--primary-gradient);
+  color: white;
   padding: 14px;
-  background: var(--primary-light);
-  color: var(--surface);
-  font-weight: 600;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: var(--transition);
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 10px;
 }
 
-.dashboard form button:hover {
-  background: var(--primary);
-}
-
-/* =========================
-   LISTAS ADMIN
-========================= */
-.dashboard ul {
+/* LISTAS DINÁMICAS (ul) */
+#listaCursos, #listaDocentes, #listaMaterias {
   list-style: none;
-  padding: 0;
-  margin-top: 20px;
+  display: grid;
+  gap: 12px;
 }
 
-.dashboard ul li {
-  background: var(--surface);
-  margin-bottom: 10px;
-  padding: 12px 16px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+#listaCursos li, #listaDocentes li, #listaMaterias li {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 18px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.dashboard ul li span {
-  font-weight: 500;
-  color: var(--text);
-}
-
-.dashboard ul li button {
-  background: var(--danger);
-  color: var(--surface);
-  border: none;
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  cursor: pointer;
   transition: var(--transition);
 }
 
-.dashboard ul li button:hover {
-  opacity: 0.9;
-}
-
-
-#materia-nombre, #materia-descripcion {
-  display: block;
-  width: 100%;       /* ocupa todo el ancho del contenedor */
-  max-width: 400px;  /* límite para que no se estire infinito */
-  margin-bottom: 10px;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-#materia-descripcion {
-  resize: none;      /*evita que el usuario pueda estirarlo */
+#listaCursos li:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateX(10px);
 }

@@ -1,127 +1,162 @@
-/* =========================
-   PANEL DOCENTE
-========================= */
-#docente-panel {
-  background: var(--surface);
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+/* ==============================================
+   PANEL DOCENTE - ESTILO ELITE GLASS PRO
+   ============================================== */
+
+/* CONTENEDOR PRINCIPAL DE PANELES */
+#docente-panel, #notas-panel {
+  background: var(--surface); /* Glassmorphism del global */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+  transition: var(--transition);
 }
 
-#docente-panel h2 {
-  margin-bottom: 16px;
-  color: var(--primary);
+#docente-panel h2, #notas-panel h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
 }
 
+/* LISTAS DE CURSOS Y ESTUDIANTES (Estilo Píldora) */
 #listaCursosDocente, #listaEstudiantesCurso {
   list-style: none;
   padding: 0;
-  margin-bottom: 20px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
 #listaCursosDocente li, #listaEstudiantesCurso li {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--surface-alt);
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  color: white;
   cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: var(--transition);
 }
 
 #listaCursosDocente li:hover, #listaEstudiantesCurso li:hover {
-  background: var(--surface-alt);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: var(--primary-light);
+  transform: translateX(10px); /* Efecto de deslizamiento moderno */
 }
 
-/* Formulario inscribir estudiante */
+/* PANEL DE INSCRIPCIÓN (Sub-tarjeta) */
 #inscribirEstudiante {
-  background: var(--surface-alt);
-  padding: 16px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 20px;
 }
 
 #inscribirEstudiante h4 {
-  margin-bottom: 12px;
-  color: var(--primary);
+  margin-bottom: 15px;
+  color: var(--primary-light);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 
 #inscribirEstudiante select {
-  width: 70%;
-  padding: 10px;
-  border: 1px solid var(--surface-alt);
-  border-radius: var(--radius);
-  margin-right: 10px;
+  width: 100%; /* Ajuste a ancho completo para móvil */
+  max-width: 300px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: var(--radius-md);
+  margin-bottom: 15px;
 }
 
 #inscribirEstudiante button {
-  padding: 10px 16px;
-  background: var(--primary);
-  color: var(--surface);
-  border-radius: var(--radius);
+  padding: 12px 24px;
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
 }
 
-#inscribirEstudiante button:hover {
-  background: var(--primary-light);
-}
-
-/* =========================
-   PANEL NOTAS
-========================= */
-#notas-panel {
-  background: var(--surface);
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-}
-
-#notas-panel h3 {
-  margin-bottom: 16px;
-  color: var(--primary);
-}
-
+/* FORMULARIO DE NOTAS */
 #notas-panel label {
   display: block;
-  margin-top: 10px;
-  font-weight: 600;
+  margin-top: 15px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   color: var(--text-muted);
+  margin-left: 10px;
 }
 
 #notas-panel select,
 #notas-panel input[type="number"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border: 1px solid var(--surface-alt);
-  border-radius: var(--radius);
-  background: var(--surface-alt);
+  padding: 14px;
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: white;
+  transition: var(--transition);
+}
+
+#notas-panel input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
 }
 
 #notas-panel button {
-  margin-top: 16px;
-  padding: 12px 18px;
-  background: var(--primary);
-  color: var(--surface);
-  border-radius: var(--radius);
-  font-weight: 600;
+  width: 100%; /* Botón grande para guardar */
+  margin-top: 25px;
+  padding: 16px;
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-#notas-panel button:hover {
-  background: var(--primary-light);
-}
-
-/* Resultados */
+/* RESULTADOS Y PROMEDIOS */
 #notas-panel p {
-  margin-top: 12px;
-  font-weight: 600;
-  color: var(--text);
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  text-align: center;
 }
 
 #promedioBloque {
-  color: var(--primary-light);
+  font-size: 1.5rem;
+  color: var(--primary-light) !important;
+  font-weight: 900;
 }
 
-#estadoNota.aprobado {
-  color: var(--success);
+#estadoNota {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-#estadoNota.reprobado {
-  color: var(--danger);
-}
+#estadoNota.aprobado { color: var(--success) !important; }
+#estadoNota.reprobado { color: var(--danger) !important; }

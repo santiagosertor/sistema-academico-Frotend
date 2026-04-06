@@ -1,44 +1,145 @@
+/* ==============================================
+   AUTH (LOGIN & REGISTRO) 
+   ============================================== */
+
 .auth-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--background);
+  padding: 24px;
 }
 
 .auth-card {
-  background: var(--card);
-  padding: 2.5rem;
+  background: var(--surface);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 4rem 3rem;
+  border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 380px;
-  border-radius: var(--radius);
-  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  max-width: 440px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
 }
 
 .auth-card h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.auth-card input {
-  width: 100%;
-  padding: .8rem;
-  margin-bottom: 1rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--surface);
-}
-
-.auth-card button {
-  width: 100%;
-  padding: .9rem;
-  background: var(--primary);
-  color: var(--surface);
-  border-radius: var(--radius);
-  font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
 }
 
 .auth-card p {
-  text-align: center;
-  margin-top: 1rem;
-  color: var(--primary);
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* --- GRUPOS DE FORMULARIO --- */
+.form-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary-light);
+  margin-bottom: 0.8rem;
+  margin-left: 14px;
+  opacity: 0.9;
+}
+
+/* Inputs Refinados para Dark Mode */
+.auth-card input {
+  width: 100%;
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.auth-card input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+  transform: translateY(-3px);
+}
+
+.auth-card input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+}
+
+/* --- BOTÓN DE ACCIÓN (PILL PRO) --- */
+.auth-card button {
+  width: 100%;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: var(--radius-pill);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: none;
   cursor: pointer;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  transition: var(--transition);
+}
+
+.auth-card button:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(30, 58, 138, 0.45);
+  filter: brightness(1.1);
+}
+
+.auth-card button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* --- FOOTER --- */
+.auth-card .footer-links {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.auth-card .footer-links a, 
+.auth-card p span {
+  font-weight: 800;
+  color: white;
+  margin-left: 6px;
+  text-decoration: none;
+  border-bottom: 2px solid var(--primary-light);
+  transition: var(--transition);
+}
+
+.auth-card .footer-links a:hover {
+  color: var(--primary-light);
+  border-bottom-color: white;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-card {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }

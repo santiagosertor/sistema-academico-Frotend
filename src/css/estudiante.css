@@ -1,32 +1,166 @@
-/* Header del estudiante */
+/* ==============================================
+   VISTA ESTUDIANTE - ESTILO ELITE GLASS PRO
+   ============================================== */
+
+/* HEADER MODERNO */
 header {
-  background: var(--secondary);
-  color: var(--surface);
-  padding: 16px 24px;
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
 }
 
 header h1 {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
 }
 
-/* Contenedor de tablas largas */
+/* SIDEBAR PARA ESTUDIANTES */
+.sidebar {
+  width: 260px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  padding: 30px 15px;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  transform: translateX(5px);
+}
+
+.sidebar .btn-salir {
+  margin-top: auto;
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* FORMULARIOS (Perfil) - ESTO ARREGLA EL BLOQUE BLANCO */
+#formPerfil {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+#formPerfil label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--primary-light);
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#formPerfil input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05); /* Fondo oscuro integrado */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+#formPerfil input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+#formPerfil button {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+/* CONTENEDOR DE CARDS Y TABLAS */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(15px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-md);
+  padding: 30px;
+  margin: 20px 0;
+}
+
+.card h2 {
+  color: white;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+/* TABLAS REFINADAS */
 .card table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 8px;
 }
 
-/* Scroll horizontal en móviles/tablets */
-@media (max-width: 768px) {
-  .card {
-    overflow-x: auto;              /* activa scroll horizontal */
-    -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
-  }
+.card table thead th {
+  color: var(--primary-light);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 12px;
+}
 
-  .card table {
-    min-width: 600px;              /* ancho mínimo para que no se comprima demasiado */
-  }
+.card table tbody td {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card table tbody td:first-child { border-radius: 12px 0 0 12px; }
+.card table tbody td:last-child { border-radius: 0 12px 12px 0; }
+
+@media (max-width: 768px) {
+  .dashboard { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; }
 }
