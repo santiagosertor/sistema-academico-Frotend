@@ -32,19 +32,21 @@ Instalación y Configuración
 Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
 1. Clonar el repositorio:
+
 git clone https://github.com
+
 cd sistema-academico-Frotend
 
 
-2. Instalar dependencias:
+3. Instalar dependencias:
 npm install
 
 
-3. Configurar Variables de Entorno (Opcional):
+4. Configurar Variables de Entorno (Opcional):
 Crea un archivo .env en la raíz si necesitas conectar con el backend:
 env
 VITE_API_URL=http://localhost:3000
 
 
-4. Iniciar Servidor de Desarrollo:
+5. Iniciar Servidor de Desarrollo:
 npm run dev
