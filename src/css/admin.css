@@ -85,7 +85,9 @@
   overflow-y: auto;
 }
 /* FORMULARIOS (Cursos, Docentes, Materias) */
-#formCurso, #formDocente, #formMateria {
+#formCurso,
+#formDocente,
+#formMateria {
   background: var(--surface); /* Glassmorphism */
   backdrop-filter: blur(25px);
   padding: 35px;
@@ -106,8 +108,8 @@
 }
 
 /* Inputs y Selects dentro del Admin */
-#admin-contenido input, 
-#admin-contenido select, 
+#admin-contenido input,
+#admin-contenido select,
 #admin-contenido textarea {
   width: 100%;
   padding: 14px 18px;
@@ -120,7 +122,9 @@
 
 /* 🚀 AGREGA ESTO PARA LAS OPCIONES */
 #admin-contenido select option {
-  background-color: var(--secondary); /* O un color oscuro sólido como #1E293B */
+  background-color: var(
+    --secondary
+  ); /* O un color oscuro sólido como #1E293B */
   color: white;
 }
 
@@ -144,13 +148,17 @@
 }
 
 /* LISTAS DINÁMICAS (ul) */
-#listaCursos, #listaDocentes, #listaMaterias {
+#listaCursos,
+#listaDocentes,
+#listaMaterias {
   list-style: none;
   display: grid;
   gap: 12px;
 }
 
-#listaCursos li, #listaDocentes li, #listaMaterias li {
+#listaCursos li,
+#listaDocentes li,
+#listaMaterias li {
   background: rgba(255, 255, 255, 0.03);
   padding: 18px 24px;
   border-radius: var(--radius-md);
@@ -164,4 +172,87 @@
 #listaCursos li:hover {
   background: rgba(255, 255, 255, 0.07);
   transform: translateX(10px);
+}
+
+/* ==============================================
+   RESPONSIVE ADMINISTRADOR
+   ============================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    min-width: auto;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .contenido {
+    margin-left: 0;
+    padding: 25px;
+  }
+
+  /* Bloques (Materias, Docentes, Cursos) más compactos */
+  #formCurso,
+  #formDocente,
+  #formMateria {
+    max-width: 100%;
+    padding: 25px;
+    margin-bottom: 25px; /* espacio entre bloques */
+  }
+}
+
+/* Móviles y pantallas pequeñas */
+@media (max-width: 600px) {
+  .sidebar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+  }
+
+  .sidebar button {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+
+  .contenido {
+    padding: 15px;
+  }
+
+  /* Bloques apilados con menos padding */
+  #formCurso,
+  #formDocente,
+  #formMateria {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  #admin-contenido h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  #admin-contenido input,
+  #admin-contenido select,
+  #admin-contenido textarea {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  #admin-contenido button[type="submit"] {
+    padding: 12px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
 }

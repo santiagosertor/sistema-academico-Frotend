@@ -1,7 +1,11 @@
+<header>
+  <h1>Panel del Docente</h1>
+</header>
+
 <div class="dashboard">
   <!-- Sidebar -->
   <aside class="sidebar">
-    <h2>Docente</h2>
+    <h2>Menú</h2>
     <button onclick="cargarVista('docente-panel')">📚 Mis Cursos</button>
     <button onclick="cargarVista('notas-panel')">📝 Gestión de Notas</button>
     <button id="btnCerrarSesion" class="btn-salir">Cerrar sesión</button>
@@ -13,46 +17,46 @@
     <section id="docente-panel">
       <h2>Mis Cursos</h2>
       <ul id="listaCursosDocente"></ul>
-      <h3>Estudiantes del Curso</h3>
-<ul id="listaEstudiantesCurso"></ul>
 
-<!-- Formulario para inscribir estudiante -->
-<div id="inscribirEstudiante">
-  <h4>Inscribir estudiante</h4>
-  <select id="selectEstudiante"></select>
-  <button onclick="inscribirEstudiante()">Inscribir</button>
-</div>
+      <h3>Estudiantes del Curso</h3>
+      <ul id="listaEstudiantesCurso"></ul>
+
+      <!-- Formulario para inscribir estudiante -->
+      <div id="inscribirEstudiante">
+        <h4>Inscribir estudiante</h4>
+        <select id="selectEstudiante"></select>
+        <button onclick="inscribirEstudiante()">Inscribir</button>
+      </div>
     </section>
 
     <!-- Panel Notas -->
-    <section id="notas-panel" style="display:none;">
+    <section id="notas-panel" style="display: none">
       <h3>Gestión de Notas</h3>
 
-<!-- Seleccionar estudiante -->
-<select id="selectEstudianteNota"></select>
+      <!-- Seleccionar estudiante -->
+      <select id="selectEstudianteNota"></select>
 
-<!-- Seleccionar bloque -->
-<select id="selectBloque">
-  <option value="1">Bloque 1</option>
-  <option value="2">Bloque 2</option>
-  <option value="3">Bloque 3</option>
-</select>
+      <!-- Seleccionar bloque -->
+      <select id="selectBloque">
+        <option value="1">Bloque 1</option>
+        <option value="2">Bloque 2</option>
+        <option value="3">Bloque 3</option>
+      </select>
 
-<!-- Notas -->
-<label>Nota Quiz:</label>
-<input type="number" id="notaQuiz" step="0.1" min="0" max="5">
+      <!-- Notas -->
+      <label>Nota Quiz:</label>
+      <input type="number" id="notaQuiz" step="0.1" min="0" max="5" />
 
-<label>Nota Parcial:</label>
-<input type="number" id="notaParcial" step="0.1" min="0" max="5">
+      <label>Nota Parcial:</label>
+      <input type="number" id="notaParcial" step="0.1" min="0" max="5" />
 
-<label>Nota Trabajo:</label>
-<input type="number" id="notaTrabajo" step="0.1" min="0" max="5">
+      <label>Nota Trabajo:</label>
+      <input type="number" id="notaTrabajo" step="0.1" min="0" max="5" />
 
-<button onclick="guardarNota()">Guardar Nota</button>
+      <button onclick="guardarNota()">Guardar Nota</button>
 
-<p>Promedio Bloque: <span id="promedioBloque">-</span></p>
-<p>Estado: <span id="estadoNota">-</span></p>
-      </div>
+      <p>Promedio Bloque: <span id="promedioBloque">-</span></p>
+      <p>Estado: <span id="estadoNota">-</span></p>
     </section>
   </main>
 </div>

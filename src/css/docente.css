@@ -1,9 +1,90 @@
+/* HEADER DOCENTE */
+header {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+/* SIDEBAR DOCENTE */
+.sidebar {
+  position: fixed;
+  top: 80px; /* altura del header */
+  left: 0;
+  width: 240px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 25px 15px;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  transform: translateX(5px);
+}
+
+.sidebar .btn-salir {
+  margin-top: auto;
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* CONTENIDO DOCENTE */
+.contenido {
+  margin-left: 240px; /* deja espacio al sidebar */
+  padding: 25px;
+  min-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
 /* ==============================================
    PANEL DOCENTE - ESTILO ELITE GLASS PRO
    ============================================== */
-
-/* CONTENEDOR PRINCIPAL DE PANELES */
-#docente-panel, #notas-panel {
+#docente-panel,
+#notas-panel {
   background: var(--surface);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
@@ -15,7 +96,8 @@
   transition: var(--transition);
 }
 
-#docente-panel h2, #notas-panel h3 {
+#docente-panel h2,
+#notas-panel h3 {
   font-size: 1.8rem;
   font-weight: 900;
   margin-bottom: 25px;
@@ -26,7 +108,8 @@
 }
 
 /* LISTAS DE CURSOS Y ESTUDIANTES */
-#listaCursosDocente, #listaEstudiantesCurso {
+#listaCursosDocente,
+#listaEstudiantesCurso {
   list-style: none;
   padding: 0;
   display: grid;
@@ -34,7 +117,8 @@
   margin-bottom: 25px;
 }
 
-#listaCursosDocente li, #listaEstudiantesCurso li {
+#listaCursosDocente li,
+#listaEstudiantesCurso li {
   padding: 16px 20px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -48,7 +132,8 @@
   transition: var(--transition);
 }
 
-#listaCursosDocente li:hover, #listaEstudiantesCurso li:hover {
+#listaCursosDocente li:hover,
+#listaEstudiantesCurso li:hover {
   background: rgba(59, 130, 246, 0.15);
   border-color: var(--primary-light);
   transform: translateX(10px);
@@ -85,11 +170,10 @@
   cursor: pointer;
 }
 
-/* Opciones visibles en dropdown (fondo oscuro) */
 #inscribirEstudiante select option,
 #notas-panel select option {
-  background-color: #1e293b; /* gris oscuro */
-  color: #fff;               /* texto blanco */
+  background-color: #1e293b;
+  color: #fff;
 }
 
 /* Botón inscribir */
@@ -102,11 +186,10 @@
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
 }
 
-/* Botón deshabilitado */
 #inscribirEstudiante button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* FORMULARIO DE NOTAS */
@@ -140,16 +223,17 @@
 }
 
 /* Chrome, Safari, Edge */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
+
 #notas-panel button {
   width: 100%;
   margin-top: 25px;
@@ -185,24 +269,31 @@ input[type=number] {
   letter-spacing: 1px;
 }
 
-#estadoNota.aprobado { color: var(--success) !important; }
-#estadoNota.reprobado { color: var(--danger) !important; }
+#estadoNota.aprobado {
+  color: var(--success) !important;
+}
+#estadoNota.reprobado {
+  color: var(--danger) !important;
+}
 
 /* ==============================================
    RESPONSIVE
    ============================================== */
 @media (max-width: 992px) {
-  #docente-panel, #notas-panel {
+  #docente-panel,
+  #notas-panel {
     padding: 20px;
   }
-  #listaCursosDocente li, #listaEstudiantesCurso li {
+  #listaCursosDocente li,
+  #listaEstudiantesCurso li {
     font-size: 0.9rem;
     padding: 12px;
   }
 }
 
 @media (max-width: 600px) {
-  #docente-panel, #notas-panel {
+  #docente-panel,
+  #notas-panel {
     padding: 15px;
     margin: 10px 0;
   }
