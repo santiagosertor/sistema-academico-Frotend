@@ -4,7 +4,7 @@
 
 /* CONTENEDOR PRINCIPAL DE PANELES */
 #docente-panel, #notas-panel {
-  background: var(--surface); /* Glassmorphism del global */
+  background: var(--surface);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   padding: 35px;
@@ -25,7 +25,7 @@
   letter-spacing: -1px;
 }
 
-/* LISTAS DE CURSOS Y ESTUDIANTES (Estilo Píldora) */
+/* LISTAS DE CURSOS Y ESTUDIANTES */
 #listaCursosDocente, #listaEstudiantesCurso {
   list-style: none;
   padding: 0;
@@ -51,10 +51,10 @@
 #listaCursosDocente li:hover, #listaEstudiantesCurso li:hover {
   background: rgba(59, 130, 246, 0.15);
   border-color: var(--primary-light);
-  transform: translateX(10px); /* Efecto de deslizamiento moderno */
+  transform: translateX(10px);
 }
 
-/* PANEL DE INSCRIPCIÓN (Sub-tarjeta) */
+/* PANEL DE INSCRIPCIÓN */
 #inscribirEstudiante {
   background: rgba(0, 0, 0, 0.2);
   padding: 25px;
@@ -72,8 +72,9 @@
   font-weight: 800;
 }
 
-#inscribirEstudiante select {
-  width: 100%; /* Ajuste a ancho completo para móvil */
+#inscribirEstudiante select,
+#notas-panel select {
+  width: 100%;
   max-width: 300px;
   padding: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -81,8 +82,17 @@
   color: white;
   border-radius: var(--radius-md);
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
+/* Opciones visibles en dropdown (fondo oscuro) */
+#inscribirEstudiante select option,
+#notas-panel select option {
+  background-color: #1e293b; /* gris oscuro */
+  color: #fff;               /* texto blanco */
+}
+
+/* Botón inscribir */
 #inscribirEstudiante button {
   padding: 12px 24px;
   background: var(--primary-gradient);
@@ -90,6 +100,13 @@
   border-radius: var(--radius-pill);
   font-weight: 700;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+}
+
+/* Botón deshabilitado */
+#inscribirEstudiante button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255,255,255,0.1);
 }
 
 /* FORMULARIO DE NOTAS */
@@ -104,7 +121,6 @@
   margin-left: 10px;
 }
 
-#notas-panel select,
 #notas-panel input[type="number"] {
   width: 100%;
   padding: 14px;
@@ -123,8 +139,19 @@
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
 }
 
+/* Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 #notas-panel button {
-  width: 100%; /* Botón grande para guardar */
+  width: 100%;
   margin-top: 25px;
   padding: 16px;
   background: var(--primary-gradient);
@@ -160,3 +187,28 @@
 
 #estadoNota.aprobado { color: var(--success) !important; }
 #estadoNota.reprobado { color: var(--danger) !important; }
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+@media (max-width: 992px) {
+  #docente-panel, #notas-panel {
+    padding: 20px;
+  }
+  #listaCursosDocente li, #listaEstudiantesCurso li {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  #docente-panel, #notas-panel {
+    padding: 15px;
+    margin: 10px 0;
+  }
+  #inscribirEstudiante select,
+  #notas-panel select {
+    max-width: 100%;
+    font-size: 0.85rem;
+  }
+}

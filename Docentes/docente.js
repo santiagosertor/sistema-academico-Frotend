@@ -209,7 +209,7 @@ async function cargarEstudiantesDisponibles() {
 }
 
 // ===============================
-// guardar nota (NUEVA FUNCIÓN)
+// guardar nota 
 // ===============================
 
 /**

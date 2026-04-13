@@ -160,7 +160,83 @@ header h1 {
 .card table tbody td:first-child { border-radius: 12px 0 0 12px; }
 .card table tbody td:last-child { border-radius: 0 12px 12px 0; }
 
-@media (max-width: 768px) {
-  .dashboard { flex-direction: column; }
-  .sidebar { width: 100%; height: auto; }
+/* ==============================================
+   TABLAS RESPONSIVE - AJUSTE FINAL
+   ============================================== */
+
+/* Contenedor con scroll horizontal */
+.card table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* scroll fluido en móvil */
+}
+
+/* Evita que las columnas se compriman demasiado */
+.card table thead,
+.card table tbody {
+  width: max-content;
+}
+
+/* Pantallas medianas (tablets <=992px) */
+@media (max-width: 992px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 15px 20px;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .contenido {
+    width: 100%;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
+
+/* Pantallas pequeñas (móviles <=600px) */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .sidebar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card {
+    padding: 15px;
+    margin: 10px 0;
+  }
+
+  /* Scroll horizontal en tablas */
+  .card table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card table thead th,
+  .card table tbody td {
+    font-size: 0.8rem;
+    padding: 10px;
+    white-space: nowrap; /* evita que se rompan las columnas */
+  }
 }
